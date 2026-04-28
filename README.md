@@ -1,56 +1,194 @@
-RIDE HAILING WEB PLATFORM 
+# Uber Clone — Full Stack Ride Booking Application
 
-Overview
+This project is a full-stack ride booking web application inspired by Uber.  
+It allows users to register as riders or drivers, request rides, and interact through a real-time system powered by WebSockets.
 
-This project is a full-stack ride-hailing web application demonstrating core full-stack development concepts including authentication, REST APIs, real-time updates, and responsive UI design. The project was implemented based on an existing open-source architecture and recreated locally for learning and experimentation.
+---
 
-⸻
+## Overview
 
-Key Features
-	•	User authentication with JWT
-	•	Ride request creation and status tracking
-	•	Real-time ride updates using Socket.IO
-	•	REST API based backend architecture
-	•	Responsive frontend UI components
+The application simulates the core workflow of a ride-hailing platform, including authentication, ride creation, and real-time communication between users.
 
-⸻
+It consists of:
+- A backend API built with Node.js and Express
+- A frontend application built with React (Vite)
+- A MongoDB database for persistence
+- A Socket.IO-based real-time communication layer
 
-Tech Stack
+---
 
-Frontend: React / Next.js, Tailwind CSS
-Backend: Node.js, Express
-Database: MongoDB
-Realtime: Socket.IO
+## Features
 
-⸻
+### Authentication and Authorization
+- User registration and login
+- Password hashing using bcrypt
+- JWT-based authentication
+- Role-based access (rider and driver)
 
-Application Workflow
-	1.	User authentication (rider / driver)
-	2.	Ride request creation
-	3.	Backend processing via REST APIs
-	4.	Real-time ride event updates
-	5.	Status tracking and UI updates
+### Ride Management
+- Create ride requests with pickup and drop locations
+- Store coordinates for mapping
+- Ride lifecycle management:
+  - requested → accepted → onway → completed
+- Fetch all rides (for drivers or system view)
 
-⸻
+### Real-Time Communication
+- Ride requests broadcast to connected clients using Socket.IO
+- Instant updates between users
 
-What This Project Demonstrates
-	•	Understanding existing codebases
-	•	Full-stack architecture fundamentals
-	•	API design and authentication flows
-	•	Real-time application concepts
-	•	Component-based frontend development
+### Map Integration
+- Interactive maps using Leaflet and React Leaflet
+- Location input and visualization
+- Coordinate-based ride handling
 
-⸻
+### Frontend Interface
+- Built with React and Vite
+- Material UI components
+- Modular component structure
+- Pages include:
+  - Home (booking interface)
+  - Login and Register
+  - Rider Dashboard
+  - Driver Dashboard
 
-How to Run
-	1.	Clone repository
-	2.	Install dependencies (frontend & backend)
-	3.	Configure environment variables
-	4.	Run backend server
-	5.	Run frontend application
+---
 
-⸻
+## Tech Stack
 
-Learning Focus
+### Frontend
+- React (Vite)
+- Material UI
+- React Router
+- Axios
+- Leaflet / React Leaflet
+- Socket.IO Client
 
-This project focuses on understanding full-stack architecture, working with real application workflows, and implementing practical backend and frontend integrations.
+### Backend
+- Node.js
+- Express
+- MongoDB (Mongoose)
+- JWT (Authentication)
+- bcrypt (Password hashing)
+- Socket.IO
+
+---
+
+## Project Structure
+
+project-root/
+│
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── config/
+│   └── index.js
+│
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   └── main.jsx
+│
+└── README.md
+
+---
+
+## API Endpoints
+
+### Authentication
+- POST /api/auth/register
+- POST /api/auth/login
+
+### Rides
+- POST /api/rides — Create a new ride
+- GET /api/rides — Retrieve rides
+
+---
+
+## Authentication
+
+Protected routes require a JWT token:
+
+Authorization: Bearer <token>
+
+---
+
+## Real-Time Events
+
+### Server → Client
+- new-ride — Emitted when a new ride is created
+
+### Client → Server
+- Ride requests via Socket.IO connection
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+git clone https://github.com/your-username/your-repo.git  
+cd your-repo  
+
+---
+
+### 2. Backend Setup
+
+cd backend  
+npm install  
+
+Create a .env file:
+
+MONGO_URI=your_mongodb_uri  
+JWT_SECRET=your_secret_key  
+PORT=5000  
+
+Run the backend server:
+
+npm run dev  
+
+---
+
+### 3. Frontend Setup
+
+cd frontend  
+npm install  
+npm run dev  
+
+---
+
+## Deployment Status
+
+This project is currently running in a local development environment and has not yet been deployed to a live production URL.
+
+Deployment can be completed using:
+- Frontend: Vercel
+- Backend: Render or Railway
+
+Note:
+WebSocket-based features (Socket.IO) require a backend platform that supports persistent connections.
+
+---
+
+## Limitations
+
+- Ride matching is broadcast-based (not optimized)
+- No dynamic pricing system
+- No driver allocation logic
+- Real-time system is basic and can be extended
+
+---
+
+## Future Improvements
+
+- Implement intelligent driver matching
+- Add dynamic pricing logic
+- Improve real-time tracking of rides
+- Add driver availability and analytics
+- Enhance backend structure (controllers and services)
+
+---
+
+## License
+
+This project is for educational purposes.
